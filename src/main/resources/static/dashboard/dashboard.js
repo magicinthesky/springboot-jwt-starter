@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('myApp.dashboard', ['ngRoute'])
-.config(['$routeProvider', function($routeProvider) {
+/**
+ * Configures the route for the dashboard page
+ * @param {Object} $routeProvider - AngularJS $routeProvider service
+ * @returns {undefined} This method does not return a value
+ */.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'dashboard/dashboard.html',
     controller: DashboardCtrl,
@@ -9,7 +13,16 @@ angular.module('myApp.dashboard', ['ngRoute'])
   });
 }]);
 
-function DashboardCtrl($scope, $rootScope, $http, isAuthenticated, authService) {
+/**
+ * Controller for the Dashboard view. Manages authentication status, user information retrieval,
+ * and API interactions for displaying user data.
+ * @param {Object} $scope - Angular scope object for the controller
+ * @param {Object} $rootScope - Angular root scope object
+ * @param {Object} $http - Angular's $http service for making HTTP requests
+ * @param {boolean} isAuthenticated - Flag indicating whether the user is authenticated
+ * @param {Object} authService - Service providing authentication-related functionality
+ * @returns {void} This controller does not return a value
+ */function DashboardCtrl($scope, $rootScope, $http, isAuthenticated, authService) {
 	$rootScope.authenticated = isAuthenticated;
 
 	$scope.serverResponse = '';
@@ -58,6 +71,13 @@ function DashboardCtrl($scope, $rootScope, $http, isAuthenticated, authService) 
 	}
 }
 DashboardCtrl.resolve = {
+	/**
+	 * Checks if the user is authenticated by attempting to refresh the JWT token.
+	 * @param {Object} $q - Angular's promise service
+	 * @param {Object} $http - Angular's HTTP client service
+	 * @param {Object} AuthService - Service handling authentication operations
+	 * @returns {Promise<boolean>} A promise that resolves to true if authentication is successful, false otherwise
+	 */
 	isAuthenticated : function($q, $http, AuthService) {
 		var deferred = $q.defer();
 		var oldToken = AuthService.getJwtToken();
