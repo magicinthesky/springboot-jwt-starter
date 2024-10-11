@@ -1,6 +1,10 @@
 angular.module('myApp.login', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
+/**
+ * Configures the route for the login page using AngularJS $routeProvider.
+ * @param {Object} $routeProvider - AngularJS $routeProvider service for configuring routes.
+ * @returns {undefined} This method does not return a value.
+ */.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
     templateUrl: 'login/login.html',
     controller: 'LoginCtrl'
@@ -8,6 +12,15 @@ angular.module('myApp.login', ['ngRoute'])
 }])
 
 .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location', 'AuthService',
+  /**
+   * Handles user login authentication and updates application state accordingly.
+   * @param {Object} $scope - Angular scope for the login controller.
+   * @param {Object} $rootScope - Angular root scope for application-wide data.
+   * @param {Object} $http - Angular's $http service for making HTTP requests.
+   * @param {Object} $location - Angular's $location service for URL manipulation.
+   * @param {Object} authService - Custom authentication service.
+   * @returns {undefined} This function does not return a value.
+   */
   function($scope, $rootScope, $http, $location, authService) {
   $scope.error = false;
   $rootScope.selectedTab = $location.path() || '/';
