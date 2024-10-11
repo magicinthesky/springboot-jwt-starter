@@ -51,11 +51,29 @@ public class UserServiceImpl implements UserService {
 		return u;
 	}
 
+	/**
+	* Retrieves all users from the system.
+	* 
+	* @return A list of all User objects in the system
+	* @throws AccessDeniedException if the current user does not have permission to access the user data
+	*/
 	public List<User> findAll() throws AccessDeniedException {
 		List<User> result = userRepository.findAll();
 		return result;
 	}
 
+	/**
+	* Changes the password for the currently authenticated user.
+	* 
+	* This method verifies the old password, then updates the user's password in the system.
+	* It uses the authentication manager to re-authenticate the user before changing the password.
+	* If the authentication manager is not set, the password change cannot be performed.
+	* 
+	* @param oldPassword The user's current password, used for verification
+	* @param newPassword The new password to set for the user
+	* @throws BadCredentialsException If the oldPassword is incorrect
+	* @throws IllegalArgumentException If the authentication manager is not set
+	*/
 	public void changePassword(String oldPassword, String newPassword) {
 
 		Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
