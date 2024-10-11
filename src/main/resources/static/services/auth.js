@@ -1,4 +1,14 @@
 angular.module('myApp.services', [])
+/**
+ * Angular factory service for authentication-related operations.
+ * Manages JWT tokens and provides methods for user authentication and authorization.
+ * @returns {Object} An object containing methods for authentication operations:
+ *   - getUser: Retrieves the current user's information
+ *   - getJwtToken: Retrieves the JWT token from local storage
+ *   - setJwtToken: Stores the JWT token in local storage
+ *   - removeJwtToken: Removes the JWT token from local storage
+ *   - createAuthorizationTokenHeader: Creates an authorization header with the JWT token
+ */
 .factory('AuthService', function($http) {
 	var user = null;
 	var TOKEN_KEY = 'jwtToken';
